@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+
+	char selection;
+	
+	vector <double> vec{};
+	
+	double userNum{};
+	
+	do {
+		cout << "P - Print Numbers" << endl;
+		cout << "A - Add a number" << endl;
+		cout << "M - Display mean of the numbers" << endl;
+		cout << "S - Display the smallest number" << endl;
+		cout << "L - Display the largest number" << endl;
+		cout << "Q - Quit" << endl << endl;
+		
+		cout << "Enter your choice:";
+		
+		cin >> selection;
+		
+		if (selection == 'P' || selection == 'p') {
+			if (vec.size() == 0) {
+				cout << "[] - The list is empty" << endl << endl;
+			}
+			else{
+				cout << "[ ";
+				for (auto nums: vec)
+					cout << nums << " ";
+				cout << "]" << endl << endl;
+			}
+		}else if (selection == 'A' || selection == 'a') {
+			cout << "Enter a number to add to the vector: ";
+			cin >> userNum;
+			vec.push_back(userNum);
+			cout << userNum << " added" << endl << endl;
+		}else if (selection == 'M' || selection == 'm') {
+			if (vec.size() == 0) {
+				cout << "Unable to calculate the mean - no data" << endl;
+			}else{
+				double sum{};
+				double mean{};
+				for (auto sumNums: vec)
+					sum += sumNums;
+				mean = sum / vec.size();
+				cout << "The mean of the data set is: " << mean << endl << endl;
+			}
+		}else if (selection == 'S' || selection == 's'){
+			if (vec.size() == 0) {
+				cout << "Unable to determine the smallest number - data set is empty" << endl;
+			}else{
+				double minNum = *min_element(vec.begin(), vec.end());
+				cout << "The smallest number in the data set is: " << minNum << endl;
+			}
+		}else if (selection == 'L' || selection == 'l'){
+			if (vec.size() == 0) {
+				cout << "Unable to determine the largest number - data set is empty" << endl;
+			}else{
+				double maxNum = *max_element(vec.begin(), vec.end());
+				cout << "The largest number in the data set is: " << maxNum << endl;
+			}
+		}else{
+			cout << "Goodbye" << endl;
+		}
+	
+	
+	while (selection != 'Q' && selection != 'q');
+	
+	}
+	
+	return 0;
+}
